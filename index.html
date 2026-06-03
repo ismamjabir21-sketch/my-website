@@ -13,11 +13,98 @@
     h1 {
       color: blue;
     }
+
+    .dark {
+      background: black;
+      color: white;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      margin: 20px auto;
+      border-radius: 8px;
+      max-width: 300px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 10px;
+    }
+
+    form {
+      max-width: 400px;
+      margin: 20px auto;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    #clock {
+      font-size: 24px;
+      margin: 20px 0;
+    }
   </style>
 
 </head>
 <body>
   <h1>Welcome to My Website</h1>
   <p>This website was made on a mobile phone.</p>
+
+  <img src="images/myphoto.jpg" alt="My Photo" width="200">
+  <h2 id="typing"></h2>
+
+  <script>
+    let text = "Future Web Developer";
+    let i = 0;
+
+    function type() {
+      if(i < text.length){
+        document.getElementById("typing").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(type,100);
+      }
+    }
+
+    type();
+  </script>
+
+  <button onclick="darkMode()">🌙 Dark Mode</button>
+
+  <script>
+    function darkMode(){
+      document.body.classList.toggle("dark");
+    }
+  </script>
+
+  <div class="card">
+    <h3>Calculator</h3>
+    <p>Made with JavaScript</p>
+  </div>
+
+  <h3 id="clock"></h3>
+
+  <script>
+    setInterval(()=>{
+      document.getElementById("clock").innerHTML =
+      new Date().toLocaleTimeString();
+    },1000);
+  </script>
+
+  <form>
+    <input type="text" placeholder="Ismam Jabir"><br><br>
+    <input type="email" placeholder="Email"><br><br>
+    <textarea placeholder="Message"></textarea><br><br>
+    <button>Send</button>
+  </form>
 </body>
 </html>
