@@ -1,69 +1,545 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My Website</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ismam Jabir - Web Developer</title>
 
   <style>
-    body {
-      background: #f0f0f0;
-      text-align: center;
-      font-family: Arial;
-    }
-
-    h1 {
-      color: blue;
-    }
-
-    .dark {
-      background: black;
-      color: white;
-    }
-
-    .card {
-      background: white;
-      padding: 20px;
-      margin: 20px auto;
-      border-radius: 8px;
-      max-width: 300px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-      margin: 10px;
-    }
-
-    form {
-      max-width: 400px;
-      margin: 20px auto;
-    }
-
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 4px;
+    * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
     }
 
-    #clock {
-      font-size: 24px;
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.dark-mode {
+      background-color: #1a1a1a;
+      color: #f0f0f0;
+    }
+
+    /* Navigation */
+    nav {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.3s;
+    }
+
+    nav a:hover {
+      opacity: 0.8;
+    }
+
+    /* Header/Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      text-align: center;
+      padding: 100px 20px;
+      min-height: 500px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      animation: slideDown 1s ease;
+    }
+
+    .hero p {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      animation: slideUp 1s ease;
+    }
+
+    .typing-text {
+      color: #ffd700;
+      font-weight: bold;
+      min-height: 2rem;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Sections */
+    section {
+      padding: 60px 20px;
       margin: 20px 0;
+    }
+
+    section h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      color: #667eea;
+    }
+
+    body.dark-mode section h2 {
+      color: #a78bfa;
+    }
+
+    /* About Section */
+    .about {
+      background: #f8f9fa;
+      border-radius: 10px;
+    }
+
+    body.dark-mode .about {
+      background: #2a2a2a;
+    }
+
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .about-text p {
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+
+    .about-image {
+      text-align: center;
+    }
+
+    .about-image img {
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Skills Section */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .skill-card {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    body.dark-mode .skill-card {
+      background: #2a2a2a;
+      box-shadow: 0 3px 10px rgba(255, 255, 255, 0.1);
+    }
+
+    .skill-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+    }
+
+    .skill-card h3 {
+      color: #667eea;
+      margin-bottom: 10px;
+    }
+
+    body.dark-mode .skill-card h3 {
+      color: #a78bfa;
+    }
+
+    /* Projects Section */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .project-card {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    body.dark-mode .project-card {
+      background: #2a2a2a;
+      box-shadow: 0 3px 10px rgba(255, 255, 255, 0.1);
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+    }
+
+    .project-image {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 3rem;
+    }
+
+    .project-content {
+      padding: 20px;
+    }
+
+    .project-content h3 {
+      color: #667eea;
+      margin-bottom: 10px;
+    }
+
+    body.dark-mode .project-content h3 {
+      color: #a78bfa;
+    }
+
+    /* Contact Section */
+    .contact {
+      background: #f8f9fa;
+      border-radius: 10px;
+    }
+
+    body.dark-mode .contact {
+      background: #2a2a2a;
+    }
+
+    .contact-content {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    form {
+      display: grid;
+      gap: 15px;
+    }
+
+    input, textarea {
+      padding: 15px;
+      border: 2px solid #ddd;
+      border-radius: 5px;
+      font-family: inherit;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+
+    body.dark-mode input,
+    body.dark-mode textarea {
+      background-color: #333;
+      color: #f0f0f0;
+      border-color: #555;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 150px;
+    }
+
+    button {
+      padding: 15px 30px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    /* Clock */
+    .clock {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: bold;
+      color: #667eea;
+      margin: 20px 0;
+    }
+
+    body.dark-mode .clock {
+      color: #a78bfa;
+    }
+
+    /* Theme Toggle Button */
+    .theme-toggle {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    /* Footer */
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    body.dark-mode footer {
+      background: #1a1a1a;
+    }
+
+    /* Social Links */
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 20px 0;
+    }
+
+    .social-links a {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      background: #667eea;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    .social-links a:hover {
+      transform: translateY(-5px);
+      background: #764ba2;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+      }
+
+      .about-content {
+        grid-template-columns: 1fr;
+      }
+
+      nav ul {
+        gap: 1rem;
+      }
+
+      section h2 {
+        font-size: 2rem;
+      }
     }
   </style>
 
 </head>
 <body>
-  <h1>Welcome to My Website</h1>
-  <p>This website was made on a mobile phone.</p>
 
-  <img src="images/myphoto.jpg" alt="My Photo" width="200">
-  <h2 id="typing"></h2>
+  <!-- Navigation -->
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <h1>Hi, I'm Ismam Jabir</h1>
+    <p>I'm a <span class="typing-text" id="typing"></span></p>
+    <div class="clock" id="clock"></div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about" id="about">
+    <div class="container">
+      <h2>About Me</h2>
+      <div class="about-content">
+        <div class="about-text">
+          <p>Welcome to my portfolio! I'm a passionate web developer who loves creating beautiful and functional websites.</p>
+          <p>I started my journey in web development on a mobile phone, and now I'm building amazing projects with HTML, CSS, and JavaScript.</p>
+          <p>My goal is to create websites that are not only visually appealing but also user-friendly and responsive.</p>
+          <p>I believe in continuous learning and staying updated with the latest web technologies.</p>
+        </div>
+        <div class="about-image">
+          <img src="images/myphoto.jpg" alt="Ismam Jabir" style="width: 100%; max-width: 300px;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills">
+    <div class="container">
+      <h2>My Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h3>📱 HTML</h3>
+          <p>Creating semantic and accessible HTML structures</p>
+        </div>
+        <div class="skill-card">
+          <h3>🎨 CSS</h3>
+          <p>Modern styling with Flexbox, Grid, and animations</p>
+        </div>
+        <div class="skill-card">
+          <h3>⚙️ JavaScript</h3>
+          <p>Interactive features and dynamic functionality</p>
+        </div>
+        <div class="skill-card">
+          <h3>📱 Responsive Design</h3>
+          <p>Mobile-first approach for all devices</p>
+        </div>
+        <div class="skill-card">
+          <h3>🎯 UI/UX</h3>
+          <p>User-friendly interfaces and great experiences</p>
+        </div>
+        <div class="skill-card">
+          <h3>🚀 Web Performance</h3>
+          <p>Fast loading times and optimized code</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects">
+    <div class="container">
+      <h2>My Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-image">💻</div>
+          <div class="project-content">
+            <h3>Portfolio Website</h3>
+            <p>My personal portfolio showcasing my web development skills and projects.</p>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-image">🧮</div>
+          <div class="project-content">
+            <h3>Calculator App</h3>
+            <p>A functional calculator built with JavaScript for basic math operations.</p>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-image">⏰</div>
+          <div class="project-content">
+            <h3>Clock Widget</h3>
+            <p>A real-time clock display that updates every second with current time.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <h2>Get In Touch</h2>
+      <div class="contact-content">
+        <form onsubmit="handleSubmit(event)">
+          <input type="text" placeholder="Your Name" required>
+          <input type="email" placeholder="Your Email" required>
+          <textarea placeholder="Your Message" required></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+        <div class="social-links">
+          <a href="#" title="GitHub">🐙</a>
+          <a href="#" title="LinkedIn">💼</a>
+          <a href="#" title="Twitter">𝕏</a>
+          <a href="#" title="Email">📧</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Ismam Jabir. All rights reserved. Made with ❤️</p>
+  </footer>
+
+  <!-- Theme Toggle Button -->
+  <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Dark Mode">🌙</button>
 
   <script>
+    // Typing Animation
     let text = "Future Web Developer";
     let i = 0;
 
@@ -71,40 +547,46 @@
       if(i < text.length){
         document.getElementById("typing").innerHTML += text.charAt(i);
         i++;
-        setTimeout(type,100);
+        setTimeout(type, 100);
       }
     }
 
     type();
-  </script>
 
-  <button onclick="darkMode()">🌙 Dark Mode</button>
+    // Clock
+    setInterval(() => {
+      document.getElementById("clock").innerHTML = new Date().toLocaleTimeString();
+    }, 1000);
 
-  <script>
-    function darkMode(){
-      document.body.classList.toggle("dark");
+    // Dark Mode Toggle
+    function toggleTheme() {
+      document.body.classList.toggle("dark-mode");
+      localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
     }
+
+    // Check for saved theme preference
+    if(localStorage.getItem("theme") === "dark") {
+      document.body.classList.add("dark-mode");
+    }
+
+    // Form Submission
+    function handleSubmit(event) {
+      event.preventDefault();
+      alert("Thank you for your message! I'll get back to you soon.");
+      event.target.reset();
+    }
+
+    // Smooth Scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if(target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
   </script>
 
-  <div class="card">
-    <h3>Calculator</h3>
-    <p>Made with JavaScript</p>
-  </div>
-
-  <h3 id="clock"></h3>
-
-  <script>
-    setInterval(()=>{
-      document.getElementById("clock").innerHTML =
-      new Date().toLocaleTimeString();
-    },1000);
-  </script>
-
-  <form>
-    <input type="text" placeholder="Ismam Jabir"><br><br>
-    <input type="email" placeholder="Email"><br><br>
-    <textarea placeholder="Message"></textarea><br><br>
-    <button>Send</button>
-  </form>
 </body>
 </html>
